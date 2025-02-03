@@ -1,9 +1,12 @@
 from __future__ import annotations
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
+
 from hatchling.builders.hooks.plugin.interface import BuildHookInterface
 from python_minifier import minify
+
 
 class MinifyBuildHook(BuildHookInterface):
     PLUGIN_NAME = "minifyer"
@@ -14,10 +17,6 @@ class MinifyBuildHook(BuildHookInterface):
         self.minified_directory = TemporaryDirectory()
 
     def minify_included_files(self, build_data):
-        # Retrieve the package name from Hatch's config
-        package_name = self.config.get("package_name", "default-package")
-        self.app.display_waiting(f"Building package: {package_name}")
-
         self.app.display_waiting("Minifying python source...")
         for included_file in self.builder.recurse_included_files():
             if not included_file.path.endswith(".py") or not included_file.distribution_path:
@@ -35,7 +34,7 @@ class MinifyBuildHook(BuildHookInterface):
             return
         self.minify_included_files(build_data)
 
-    def finalize(self, version: str, build_data: dict[str, Any], artifact_path: str) -> None:
+    def finalize(self, version: str, build_data: dict[str, Any], artifact_path: str) -> None:  # noqa: ARG002
         if version != "standard":
             return
         self.minified_directory.cleanup()
