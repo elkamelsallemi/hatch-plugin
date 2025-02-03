@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import click
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
@@ -38,3 +39,19 @@ class MinifyBuildHook(BuildHookInterface):
         if version != "standard":
             return
         self.minified_directory.cleanup()
+
+
+    # Add the custom CLI command here
+    @click.group()
+    def build_group(self):
+        """Group for custom build commands."""
+        pass
+
+    @build_group.command("test")
+    @click.argument("package_name")
+    @click.pass_obj
+    def test_command(self, app: Any, package_name: str) -> None:
+        """
+        Custom command to test package name.
+        """
+        app.display_info(f"Testing package: {package_name}")
