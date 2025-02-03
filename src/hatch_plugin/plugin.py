@@ -17,7 +17,7 @@ class MinifyBuildHook(BuildHookInterface):
         self.minified_directory = TemporaryDirectory()
 
     def minify_included_files(self, build_data):
-        self.app.display_waiting("Minifying python source...")
+        self.app.display_waiting("Minifying python source...!")
         for included_file in self.builder.recurse_included_files():
             if not included_file.path.endswith(".py") or not included_file.distribution_path:
                 self.app.display_debug(f"Not minified: {included_file.path}")
