@@ -9,7 +9,8 @@ description = "My custom Hatch plugin"
 authors = [  { name = "elkamelsallemi", email = "elkamel.sallemi@gmail.com" },]
 dependencies = [
   "hatchling",
-  "python-minifier"
+  "python-minifier",
+  "click",
 ]
 
 [project.entry-points.hatch]
