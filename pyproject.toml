@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hatch-plugin"
+version = "0.1.0"
+description = "My custom Hatch plugin"
+authors = [  { name = "elkamelsallemi", email = "elkamel.sallemi@gmail.com" },]
+dependencies = [
+  "hatchling",
+  "python-minifier"
+]
+
+[project.entry-points.hatch]
+minfyer = "hatch_plugin.hooks"
+
+[tool.hatch.plugin]
+"minifyer" = { version = "0.1.0"}
