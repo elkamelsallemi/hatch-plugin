@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.entry-points.hatch]
-minfyer = "hatch_plugin.hooks"
+minifyer = "hatch_plugin.hooks"
 
 [tool.hatch.plugin]
 "minifyer" = { version = "0.1.0"}
