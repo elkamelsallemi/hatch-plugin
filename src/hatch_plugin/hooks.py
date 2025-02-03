@@ -1,5 +1,5 @@
 from hatchling.plugin import hookimpl
-from hatch_minify.plugin import MinifyBuildHook
+from hatch_plugin.plugin import MinifyBuildHook
 from hatch.command.build import BuildCommand
 import click
 
