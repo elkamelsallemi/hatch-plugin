@@ -17,7 +17,9 @@ class MinifyBuildHook(BuildHookInterface):
     def initialize(self, version: str, build_data: dict[str, Any]) -> None:
         """Called during the initialization phase of the build"""
         print("Hello, World! Initialization phase.")
-        project_name = build_data.get("name", "")
+        project_name = self.build_config.name
+        
+        # Print the project name for debugging
         print(f"Project name must start with 'monorepo-', but got: {project_name}")
 
     def finalize(self, version: str, build_data: dict[str, Any], artifact_path: str) -> None:  # noqa: ARG002
