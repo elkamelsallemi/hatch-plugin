@@ -17,6 +17,13 @@ class MinifyBuildHook(BuildHookInterface):
     def initialize(self, version: str, build_data: dict[str, Any]) -> None:
         """Called during the initialization phase of the build"""
         project_name = self.metadata.name
+
+        if not project_name.startswith("monorepo-"):
+            raise ValueError(
+                f"Invalid project name: '{project_name}'. "
+                "Project name must start with 'monorepo-'."
+            )
+
         print(f"Hello, World! Initialization phase. Project name: {project_name}")
         print("Hello, World! Initialization phase.")
 
