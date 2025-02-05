@@ -8,7 +8,7 @@ from hatch_plugin.__about__ import __version__
 
 @click.group(context_settings={"help_option_names": ["-h", "--help"]}, invoke_without_command=True)
 @click.version_option(version=__version__, prog_name="monorepo")
-def hatch_new_cli():
+def monorepo():
     """Build the project using Hatch."""
     result = subprocess.run(['hatch', 'build'], capture_output=True, text=True)
     if result.returncode == 0:
