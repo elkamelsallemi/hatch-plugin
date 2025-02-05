@@ -10,7 +10,7 @@ from hatch_plugin.__about__ import __version__
 @click.version_option(version=__version__, prog_name="monorepo")
 def monorepo():
     """Build the project using Hatch."""
-    result = subprocess.run(['hatch', 'build'], capture_output=True, text=True)
+    result = subprocess.run(['hatch', 'build', '-v'], capture_output=True, text=True)
     if result.returncode == 0:
         click.echo("Build successful.")
     else:
