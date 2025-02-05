@@ -18,8 +18,7 @@ class MinifyBuildHook(BuildHookInterface):
         """Called during the initialization phase of the build"""
         print("Hello, World! Initialization phase.")
         project_name = build_data.get("name", "")
-        if not project_name.startswith("monorepo-"):
-            raise ValueError(f"Project name must start with 'monorepo-', but got: {project_name}")
+        print(f"Project name must start with 'monorepo-', but got: {project_name}")
 
     def finalize(self, version: str, build_data: dict[str, Any], artifact_path: str) -> None:  # noqa: ARG002
         """Called during the finalization phase of the build"""
