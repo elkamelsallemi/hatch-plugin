@@ -16,5 +16,9 @@ dependencies = [
 [project.entry-points.hatch]
 minifyer = "hatch_plugin.hooks"
 
+[project.scripts]
+monorepo = "hatch_new_cli.cli:hatch_new_cli"
+
 [tool.hatch.plugin]
 "minifyer" = { version = "0.1.0"}
+
