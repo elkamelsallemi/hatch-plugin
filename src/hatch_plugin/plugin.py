@@ -10,9 +10,9 @@ from python_minifier import minify
 class MinifyBuildHook(BuildHookInterface):
     PLUGIN_NAME = "minifyer"
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-        self.builder = self.build_config.builder
+    # def __init__(self, *args: Any, **kwargs: Any) -> None:
+    #     super().__init__(*args, **kwargs)
+    #     self.builder = self.build_config.builder
 
     def initialize(self, version: str, build_data: dict[str, Any]) -> None:
         """Called during the initialization phase of the build"""
