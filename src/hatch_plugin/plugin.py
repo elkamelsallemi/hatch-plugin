@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import click
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
@@ -18,7 +17,7 @@ class MinifyBuildHook(BuildHookInterface):
         self.minified_directory = TemporaryDirectory()
 
     def minify_included_files(self, build_data):
-        self.app.display_waiting("Minifying python source...!")
+        self.app.display_waiting("Minifying python source...")
         for included_file in self.builder.recurse_included_files():
             if not included_file.path.endswith(".py") or not included_file.distribution_path:
                 self.app.display_debug(f"Not minified: {included_file.path}")
@@ -39,19 +38,3 @@ class MinifyBuildHook(BuildHookInterface):
         if version != "standard":
             return
         self.minified_directory.cleanup()
-
-
-    # Add the custom CLI command here
-    @click.group()
-    def build_group(self):
-        """Group for custom build commands."""
-        pass
-
-    @build_group.command("test")
-    @click.argument("package_name")
-    @click.pass_obj
-    def test_command(self, app: Any, package_name: str) -> None:
-        """
-        Custom command to test package name.
-        """
-        app.display_info(f"Testing package: {package_name}")
