@@ -17,7 +17,7 @@ class MinifyBuildHook(BuildHookInterface):
     def initialize(self, version: str, build_data: dict[str, Any]) -> None:
         """Called during the initialization phase of the build"""
         print("Hello, World! Initialization phase.")
-        files_to_exclude = ["README.md", "LICENSE.txt"]  # Specify files to exclude
+        files_to_exclude = ["__about__.py"]  # Specify files to exclude
         excluded_files = set()
 
         for included_file in build_data.get("force_include", {}).copy():
