@@ -6,7 +6,7 @@ from typing import Any
 
 from hatchling.builders.hooks.plugin.interface import BuildHookInterface
 from python_minifier import minify
-
+import argparse
 
 class MinifyBuildHook(BuildHookInterface):
     PLUGIN_NAME = "minifyer"
@@ -15,6 +15,16 @@ class MinifyBuildHook(BuildHookInterface):
         super().__init__(*args, **kwargs)
         self.builder = self.build_config.builder
         self.minified_directory = TemporaryDirectory()
+
+    
+    def get_cli_path(self) -> Path:
+        """Get the path from the CLI arguments."""
+        parser = argparse.ArgumentParser(description="Minify Python files.")
+        parser.add_argument(
+            '--source-path', type=Path, required=True, help="Path to the source directory"
+        )
+        args = parser.parse_args()
+        return args.source_path   
 
     def minify_included_files(self, build_data):
         self.app.display_waiting("Minifying python source... hhh")
@@ -32,6 +42,8 @@ class MinifyBuildHook(BuildHookInterface):
     def initialize(self, version: str, build_data: dict[str, Any]) -> None:
         if version != "standard":
             return
+        
+        source_path = self.get_cli_path()  # Read the source path from CLI argument
         self.minify_included_files(build_data)
 
     def finalize(self, version: str, build_data: dict[str, Any], artifact_path: str) -> None:  # noqa: ARG002
